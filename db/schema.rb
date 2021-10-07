@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_153141) do
+ActiveRecord::Schema.define(version: 2021_10_07_232441) do
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2021_10_05_153141) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "article_id"
+    t.string "name"
+    t.string "email"
+    t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
