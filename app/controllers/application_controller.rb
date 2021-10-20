@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    logged_id? || access_denied
+    logged_in? || access_denied
   end
 
-  def logged_id?
+  def logged_in?
     current_user.present?
   end
 
