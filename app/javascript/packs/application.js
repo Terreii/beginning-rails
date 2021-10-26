@@ -6,7 +6,9 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
+import "@rails/actiontext"
 import "channels"
+import "trix"
 
 Rails.start()
 Turbolinks.start()
