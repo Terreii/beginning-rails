@@ -1,3 +1,2 @@
-Notifier#email_friend
-
-<%= @greeting %>, find me in app/views/notifier_mailer/email_friend.text.erb
+Your friend, <%= @sender_name %>, thinks you may like the following article:
+<%= @article.title %>: <%= article_url(@article) %>
