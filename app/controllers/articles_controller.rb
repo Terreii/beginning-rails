@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1 or /articles/1.json
   def show
+    @email_a_friend = EmailAFriend.new
   end
 
   # GET /articles/new
@@ -59,8 +60,14 @@ class ArticlesController < ApplicationController
   end
 
   def notify_friend
-    NotifierMailer.email_friend(@article, params[:name], params[:email]).deliver_later
-    redirect_to @article, notice: 'Successfully send a message to your friend'
+    @email_a_friend = EmailAFriend.new(email_a_friend_params)
+
+    if @email_a_friend.valid?
+      NotifierMailer.email_friend(@article, @email_a_friend.name, @email_a_friend.email).deliver_later
+      redirect_to @article, notice: 'Successfully send a message to your friend'
+    else
+      render :notify_friend, status: :unprocessable_entity
+    end
   end
 
   private
@@ -76,5 +83,9 @@ class ArticlesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def article_params
       params.require(:article).permit(:title, :cover_image, :remove_cover_image, :location, :excerpt, :body, :published_at, category_ids: [])
+    end
+
+    def email_a_friend_params
+      params.require(:email_a_friend).permit(:name, :email)
     end
 end
