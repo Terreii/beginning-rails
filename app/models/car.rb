@@ -1,7 +1,6 @@
 class Car
-  include ActiveModel::AttributeAssignment
   include ActiveModel::Dirty
-  include ActiveModel::Validations
+  include ActiveModel::Model
 
   attr_accessor :make, :model, :year, :color
 
@@ -14,15 +13,10 @@ class Car
   before_paint :keep_it_waxed
   after_paint :notify_dmv, if: :color_changed?
 
-  def initialize(attributes = {})
-    assign_attributes(attributes) if attributes
-
-    super()
-  end
-
   def paint(new_color)
     run_callbacks :paint do
       Rails.logger.info "Painting the car #{new_color}"
+
       color_will_change! if color != new_color
       self.color = new_color
     end
