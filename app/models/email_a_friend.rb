@@ -1,5 +1,5 @@
 class EmailAFriend
-  inlcode ActiveModel::Model
+  include ActiveModel::Model
 
   attr_accessor :name, :email
 
