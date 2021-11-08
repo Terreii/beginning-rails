@@ -1,15 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  location: MyString
-  excerpt: MyString
-  body: MyText
-  published_at: 2021-09-28 10:51:21
-
-two:
-  title: MyString
-  location: MyString
-  excerpt: MyString
-  body: MyText
-  published_at: 2021-09-28 10:51:21
+  user: eugene
+  title: "Welcome to Rails"
+  published_at: <%= 3.days.ago %>
