@@ -1,11 +1,11 @@
 <%= form_with(model: article) do |form| %>
   <% if article.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <h2><%= t("errors.header", count: article.errors.count) %></h2>
 
       <ul>
-        <% article.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% article.errors.full_message.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -25,7 +25,7 @@
         <%= image_tag article.cover_image.variant(resize_to_limit: [50, 50]) %>
         <hr>
         <%= form.label :remove_cover_image do %>
-          <%= form.check_box :remove_cover_image %> Remove this image
+          <%= form.check_box :remove_cover_image %> <%= t("articles.remove_this_image") %>
         <% end %>
       </p>
     <% end %>

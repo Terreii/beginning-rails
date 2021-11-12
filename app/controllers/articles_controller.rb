@@ -28,7 +28,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: "Article was successfully created." }
+        format.html { redirect_to @article, notice: t('articles.create_success') }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to @article, notice: "Article was successfully updated." }
+        format.html { redirect_to @article, notice: t('articles.update_success') }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
+      format.html { redirect_to articles_url, notice: t('articles.destroy_success') }
       format.json { head :no_content }
     end
   end
@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
 
     if @email_a_friend.valid?
       NotifierMailer.email_friend(@article, @email_a_friend.name, @email_a_friend.email).deliver_later
-      redirect_to @article, notice: 'Successfully send a message to your friend'
+      redirect_to @article, notice: t('articles.notify_friend_success')
     else
       render :notify_friend, status: :unprocessable_entity
     end
